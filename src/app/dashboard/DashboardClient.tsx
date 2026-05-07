@@ -116,8 +116,10 @@ export default function DashboardClient({
             setBookingSuccess(data as Booking);
             setShowBookingModal(false);
             setTimeout(() => setBookingSuccess(null), 5000);
-        } catch (err: unknown) {
-            setError(err instanceof Error ? err.message : "Booking failed. Please try again.");
+        } catch (err: any) {
+            console.error("Booking error:", err);
+            const message = err.message || err.details || (typeof err === 'string' ? err : "Booking failed. Please try again.");
+            setError(message);
         } finally {
             setLoading(false);
         }
