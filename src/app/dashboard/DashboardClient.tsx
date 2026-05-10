@@ -496,69 +496,18 @@ export default function DashboardClient({
                                                         boxShadow: (!selectedDate || !selectedTime) ? "none" : "0 4px 14px rgba(37,99,235,0.3)",
                                                         transition: "all 0.3s"
                                                     }}
-                                                >Next: Review Summary</button>
-                                            </div>
-                                        </motion.div>
-                                    )}
-
-                                    {/* ── Step 3: Booking Summary ── */}
-                                    {step === 3 && (
-                                        <motion.div key="step3" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}
-                                            style={{ display: "flex", flexDirection: "column", gap: 16 }}
-                                        >
-                                            <div style={{ background: "#eff6ff", borderRadius: 16, padding: 20, border: "1px solid #bfdbfe" }}>
-                                                <h3 style={{ fontWeight: 800, color: "#1e3a8a", fontSize: 15, marginBottom: 14 }}>Booking Summary</h3>
-                                                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                                                    {[
-                                                        { label: "Service", value: SERVICES.find(s => s.id === selectedService)?.name },
-                                                        { label: "Vehicle", value: vehicleType.charAt(0).toUpperCase() + vehicleType.slice(1) },
-                                                        { label: "Date", value: selectedDate ? format(parseISO(selectedDate), "MMMM d, yyyy") : "" },
-                                                        { label: "Base Time", value: selectedTime },
-                                                        { label: "Price", value: `₹${SERVICES.find(s => s.id === selectedService)?.price}` },
-                                                    ].map(({ label, value }) => (
-                                                        <div key={label} style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                                                            <span style={{ fontSize: 13, color: "#3b82f6", fontWeight: 600 }}>{label}</span>
-                                                            <span style={{ fontSize: 14, fontWeight: 800, color: "#1e3a8a" }}>{value}</span>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </div>
-
-                                            <div style={{ background: "#fffbeb", borderRadius: 14, padding: 14, border: "1px solid #fde68a", display: "flex", gap: 10 }}>
-                                                <Zap style={{ width: 16, height: 16, color: "#d97706", flexShrink: 0, marginTop: 2 }} />
-                                                <p style={{ fontSize: 12, color: "#92400e", lineHeight: 1.6 }}>
-                                                    <strong>Almost done!</strong> Next, provide your contact details and location to finalize your booking.
-                                                </p>
-                                            </div>
-
-                                            <div style={{ display: "flex", gap: 12 }}>
-                                                <button onClick={() => setStep(2)}
-                                                    style={{ flex: 1, padding: "12px 16px", borderRadius: 12, border: "2px solid #e2e8f0", background: "white", cursor: "pointer", fontWeight: 700, fontSize: 14, color: "#475569", transition: "all 0.2s" }}
-                                                    onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "#cbd5e1"; (e.currentTarget as HTMLButtonElement).style.background = "#f8fafc"; }}
-                                                    onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "#e2e8f0"; (e.currentTarget as HTMLButtonElement).style.background = "white"; }}
-                                                >Back</button>
-                                                <button onClick={() => setStep(4)} id="next-step-3-btn"
-                                                    style={{
-                                                        flex: 1, padding: "12px 16px", borderRadius: 12, border: "none",
-                                                        background: "linear-gradient(135deg, #2563eb, #1d4ed8)",
-                                                        color: "white",
-                                                        cursor: "pointer",
-                                                        fontWeight: 700, fontSize: 14,
-                                                        boxShadow: "0 4px 14px rgba(37,99,235,0.3)",
-                                                        transition: "all 0.3s"
-                                                    }}
                                                 >Next: Contact Details</button>
                                             </div>
                                         </motion.div>
                                     )}
 
-                                    {/* ── Step 4: Contact & Location ── */}
-                                    {step === 4 && (
-                                        <motion.div key="step4" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}
+                                    {/* ── Step 3: Contact & Location ── */}
+                                    {step === 3 && (
+                                        <motion.div key="step3" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}
                                             style={{ display: "flex", flexDirection: "column", gap: 18 }}
                                         >
                                             <div style={{ background: "#f8fafc", borderRadius: 12, padding: "12px 16px", border: "1px dashed #cbd5e1", marginBottom: 4 }}>
-                                                <p style={{ fontSize: 12, color: "#64748b", fontWeight: 600 }}>Finalizing booking for:</p>
+                                                <p style={{ fontSize: 12, color: "#64748b", fontWeight: 600 }}>Booking for:</p>
                                                 <p style={{ fontSize: 14, fontWeight: 800, color: "#0f172a" }}>{SERVICES.find(s => s.id === selectedService)?.name} • {selectedTime}</p>
                                             </div>
 
@@ -570,6 +519,52 @@ export default function DashboardClient({
                                             <div>
                                                 <label style={{ display: "block", fontSize: 13, fontWeight: 700, color: "#374151", marginBottom: 8 }}>Phone Number</label>
                                                 <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="e.g. 9876543210" className="input-premium" id="phone-input" />
+                                            </div>
+
+                                            <div style={{ display: "flex", gap: 12 }}>
+                                                <button onClick={() => setStep(2)}
+                                                    style={{ flex: 1, padding: "12px 16px", borderRadius: 12, border: "2px solid #e2e8f0", background: "white", cursor: "pointer", fontWeight: 700, fontSize: 14, color: "#475569", transition: "all 0.2s" }}
+                                                    onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "#cbd5e1"; (e.currentTarget as HTMLButtonElement).style.background = "#f8fafc"; }}
+                                                    onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "#e2e8f0"; (e.currentTarget as HTMLButtonElement).style.background = "white"; }}
+                                                >Back</button>
+                                                <button onClick={() => setStep(4)} disabled={!location || !phone} id="next-step-3-btn"
+                                                    style={{
+                                                        flex: 1, padding: "12px 16px", borderRadius: 12, border: "none",
+                                                        background: (!location || !phone) ? "#e2e8f0" : "linear-gradient(135deg, #2563eb, #1d4ed8)",
+                                                        color: (!location || !phone) ? "#94a3b8" : "white",
+                                                        cursor: (!location || !phone) ? "not-allowed" : "pointer",
+                                                        fontWeight: 700, fontSize: 14,
+                                                        boxShadow: (!location || !phone) ? "none" : "0 4px 14px rgba(37,99,235,0.3)",
+                                                        transition: "all 0.3s"
+                                                    }}
+                                                >Next: Review Summary</button>
+                                            </div>
+                                        </motion.div>
+                                    )}
+
+                                    {/* ── Step 4: Booking Summary ── */}
+                                    {step === 4 && (
+                                        <motion.div key="step4" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}
+                                            style={{ display: "flex", flexDirection: "column", gap: 16 }}
+                                        >
+                                            <div style={{ background: "#eff6ff", borderRadius: 16, padding: 20, border: "1px solid #bfdbfe" }}>
+                                                <h3 style={{ fontWeight: 800, color: "#1e3a8a", fontSize: 15, marginBottom: 14 }}>Booking Summary</h3>
+                                                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                                                    {[
+                                                        { label: "Service", value: SERVICES.find(s => s.id === selectedService)?.name },
+                                                        { label: "Vehicle", value: vehicleType.charAt(0).toUpperCase() + vehicleType.slice(1) },
+                                                        { label: "Date", value: selectedDate ? format(parseISO(selectedDate), "MMMM d, yyyy") : "" },
+                                                        { label: "Base Time", value: selectedTime },
+                                                        { label: "Location", value: location },
+                                                        { label: "Phone", value: phone },
+                                                        { label: "Price", value: `₹${SERVICES.find(s => s.id === selectedService)?.price}` },
+                                                    ].map(({ label, value }) => (
+                                                        <div key={label} style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                                                            <span style={{ fontSize: 13, color: "#3b82f6", fontWeight: 600 }}>{label}</span>
+                                                            <span style={{ fontSize: 14, fontWeight: 800, color: "#1e3a8a", textAlign: "right", maxWidth: "60%" }}>{value}</span>
+                                                        </div>
+                                                    ))}
+                                                </div>
                                             </div>
 
                                             {error && (
@@ -586,14 +581,14 @@ export default function DashboardClient({
                                                     onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "#cbd5e1"; (e.currentTarget as HTMLButtonElement).style.background = "#f8fafc"; }}
                                                     onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "#e2e8f0"; (e.currentTarget as HTMLButtonElement).style.background = "white"; }}
                                                 >Back</button>
-                                                <button onClick={handleBooking} disabled={loading || !location || !phone} id="confirm-booking-btn"
+                                                <button onClick={handleBooking} disabled={loading} id="confirm-booking-btn"
                                                     style={{
                                                         flex: 1, padding: "12px 16px", borderRadius: 12, border: "none",
-                                                        background: (loading || !location || !phone) ? "#e2e8f0" : "linear-gradient(135deg, #2563eb, #1d4ed8)",
-                                                        color: (loading || !location || !phone) ? "#94a3b8" : "white",
-                                                        cursor: (loading || !location || !phone) ? "not-allowed" : "pointer",
+                                                        background: loading ? "#e2e8f0" : "linear-gradient(135deg, #2563eb, #1d4ed8)",
+                                                        color: loading ? "#94a3b8" : "white",
+                                                        cursor: loading ? "not-allowed" : "pointer",
                                                         fontWeight: 700, fontSize: 14, display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
-                                                        boxShadow: (loading || !location || !phone) ? "none" : "0 4px 14px rgba(37,99,235,0.3)",
+                                                        boxShadow: loading ? "none" : "0 4px 14px rgba(37,99,235,0.3)",
                                                         transition: "all 0.3s"
                                                     }}
                                                 >
@@ -602,7 +597,6 @@ export default function DashboardClient({
                                                     ) : (
                                                         <><Sparkles style={{ width: 16, height: 16 }} />Confirm Booking</>
                                                     )}
-
                                                 </button>
                                             </div>
                                         </motion.div>
